@@ -62,12 +62,18 @@
     
     self.tipLabel.text = [NSString stringWithFormat:@"$%0.2f", tipAmount];
     self.totalLabel.text = [NSString stringWithFormat:@"$%0.2f", totalAmount];
-    
+    [self updateTipPercentages];
 }
 
 - (void)updateTipPercentages {
+    NSArray * arr = [SettingsViewController getDefaults];
+    NSString *val1 = arr[0];
+    NSString *val2 = arr[1];
+    NSString *val3 = arr[2];
     
-    [self.tipControl setTitle: @"20%" forSegmentAtIndex:0];
+    [self.tipControl setTitle: [val1 stringByAppendingString: @"%"] forSegmentAtIndex:0];
+    [self.tipControl setTitle: [val2 stringByAppendingString: @"%"] forSegmentAtIndex:1];
+    [self.tipControl setTitle: [val3 stringByAppendingString: @"%"] forSegmentAtIndex:2];
     
 }
 
@@ -77,10 +83,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     NSLog(@"view will appear");
+    [self updateTipPercentages];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     NSLog(@"view did appear");
+    [self updateTipPercentages];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

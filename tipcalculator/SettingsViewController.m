@@ -71,7 +71,7 @@
     [self saveDefaults];
 }
 
-- (NSArray*) getDefaults {
++ (NSArray*) getDefaults {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *val1 = [defaults stringForKey:@"tip_percent1"];
     NSString *val2 = [defaults stringForKey:@"tip_percent2"];
@@ -94,7 +94,7 @@
 }
 
 -(void) loadDefaults {
-    NSArray *arr = [self getDefaults];
+    NSArray *arr = [SettingsViewController getDefaults];
     self.default1.text = arr[0];
     self.default2.text = arr[1];
     self.default3.text = arr[2];
