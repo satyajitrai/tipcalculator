@@ -56,8 +56,8 @@
 -(void) updateValues {
     float billAmount = [self.billTextField.text floatValue];
     
-    NSArray *tipValues = @[ @(0.1), @(0.15), @(0.2) ];
-    float tipAmount = billAmount * [tipValues[self.tipControl.selectedSegmentIndex]floatValue];
+    NSArray *tipValues = [SettingsViewController getDefaults];
+    float tipAmount = billAmount * [tipValues[self.tipControl.selectedSegmentIndex]floatValue] / 100.0;
     float totalAmount = tipAmount + billAmount;
     
     self.tipLabel.text = [NSString stringWithFormat:@"$%0.2f", tipAmount];
@@ -83,12 +83,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     NSLog(@"view will appear");
-    [self updateTipPercentages];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     NSLog(@"view did appear");
-    [self updateTipPercentages];
+    [self updateValues];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
